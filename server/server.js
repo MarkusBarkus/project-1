@@ -6,6 +6,10 @@ import * as fs from "node:fs/promises";
 
 import env from './modules/env.js';
 
+import { refreshDatabase } from './modules/data.js';
+
+await refreshDatabase();
+
 const mergeData = (isoCountries, rawAdvisories) => {
 
     const advisories = rawAdvisories.data;
