@@ -7,6 +7,13 @@ import * as fs from "node:fs/promises";
 import env from './modules/env.js';
 
 import { refreshDatabase } from './modules/data.js';
+import { startServer } from './modules/api.js';
+
+const API_PORT = 9000;
+
+await refreshDatabase();
+
+startServer(API_PORT);
 
 await refreshDatabase();
 
