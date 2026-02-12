@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { readFile } from "node:fs/promises";
+import { refreshDatabase } from './data.js';
 
 // The Express application object
 const app = express();
@@ -47,6 +48,17 @@ app.get('/about/:what', async (request, response) => {
     }
 
     response.json(responseJson);
+});
+
+app.post('/db/refresh', async (_request, response) => {
+    try {
+        await refreshDatabase();
+        response.sendStatus(200);
+    }
+    catch (e) {
+        console.error(e);
+        response.sendStatus(500);
+    }
 });
 
 const startServer = (port) => {
