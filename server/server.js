@@ -1,5 +1,4 @@
-import dotenv from 'dotenv';
-dotenv.config();
+
 
 import { initDatabase, deleteDatabase, insertDocument, insertDocuments } from './modules/db.js';
 import * as fs from "node:fs/promises";
