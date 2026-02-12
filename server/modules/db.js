@@ -32,11 +32,21 @@ const deleteDatabase = (context, database) => {
     return context.db(database).dropDatabase();
 }
 
+const findDocument = (context, database, collection, criteria, projection = { _id: 0 }) => {
+    return context.db(database).collection(collection).findOne(criteria, { projection });
+}
+
+const findDocuments = (context, database, collection, criteria, projection = { _id: 0 }) => {
+    return context.db(database).collection(collection).find(criteria, { projection }).toArray();
+}
+
 export {
     initDatabase,
     insertDocument,
     insertDocuments,
     deleteDocument,
     deleteCollection,
-    deleteDatabase
+    deleteDatabase,
+    findDocument,
+    findDocuments
 };

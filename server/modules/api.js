@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { readFile } from "node:fs/promises";
-import { refreshDatabase } from './data.js';
+import { refreshDatabase, retrieveAlerts } from './data.js';
 
 // The Express application object
 const app = express();
@@ -48,6 +48,11 @@ app.get('/about/:what', async (request, response) => {
     }
 
     response.json(responseJson);
+});
+
+app.get('/alerts', async (_request, response) => {
+    let alerts = await retrieveAlerts();
+    response.json(alerts);
 });
 
 app.post('/db/refresh', async (_request, response) => {

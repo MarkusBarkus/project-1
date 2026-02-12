@@ -65,8 +65,29 @@ const refreshDatabase = async () => {
     }
 }
 
+
+const retrieveAlerts = async () => {
+    let alerts = [];
+
+    let context = undefined;
+    try {
+        // Initialize the database
+        context = await db.initDatabase(env.DB_URI);
+        alerts = await db.findDocuments(context, DATABASE_NAME, ALERTS_COLLECTION, {});
+    }
+    catch (e) {
+        console.error(e);
+    }
+    finally {
+        context?.close();
+    }
+
+    return alerts;
+}
+
 export {
     refreshDatabase,
+    retrieveAlerts,
     DATABASE_NAME,
     ADVISORY_COLLECTION,
     ISO_COUNTRIES_COLLECTION,
