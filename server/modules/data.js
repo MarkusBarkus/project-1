@@ -73,7 +73,15 @@ const retrieveAlerts = async () => {
     try {
         // Initialize the database
         context = await db.initDatabase(env.DB_URI);
-        alerts = await db.findDocuments(context, DATABASE_NAME, ALERTS_COLLECTION, {});
+
+
+        const projection = {
+            _id: 0,
+            country_code: 1,
+            country_name: 1
+        }
+
+        alerts = await db.findDocuments(context, DATABASE_NAME, ALERTS_COLLECTION, {}, projection);
     }
     catch (e) {
         console.error(e);

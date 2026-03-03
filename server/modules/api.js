@@ -9,6 +9,7 @@ const app = express();
 // Configure Express APIs Middleware
 app.use(express.json()); // Parse JSON bodies
 app.use(cors()); // Handle CORS headers
+app.use(express.static('public'));
 
 app.use((req, _res, next) => {
     const timestamp = new Date(Date.now());
