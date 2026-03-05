@@ -40,6 +40,10 @@ const findDocuments = (context, database, collection, criteria, projection = { _
     return context.db(database).collection(collection).find(criteria, { projection }).toArray();
 }
 
+// const updateDocument = (context, database, collection, criteria, update) => {
+//     return context.db(database).collection(collection).updateOne(criteria, update);
+// }
+
 export {
     initDatabase,
     insertDocument,
@@ -48,5 +52,6 @@ export {
     deleteCollection,
     deleteDatabase,
     findDocument,
-    findDocuments
+    findDocuments,
+    //updateDocument
 };

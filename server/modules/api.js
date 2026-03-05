@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { readFile } from "node:fs/promises";
-import { refreshDatabase, retrieveAlerts } from './data.js';
+import { refreshDatabase, retrieveAlerts, retrieveAlert, retrieveSaved } from './data.js';
 
 // The Express application object
 const app = express();
@@ -54,6 +54,41 @@ app.get('/about/:what', async (request, response) => {
 app.get('/alerts', async (_request, response) => {
     let alerts = await retrieveAlerts();
     response.json(alerts);
+});
+
+app.get('/saved', async (_request, response) => {
+    let saved = await retrieveSaved();
+    response.json(saved);
+});
+
+app.get('/alert/:country_code', async (_request, response) => {
+    const field_key = _request.params.country_code;
+    let alert = await retrieveAlert(field_key);
+    response.json(alert);
+});
+
+app.post('/save/:country_code', async (_request, response) => {
+    const field_key = _request.params.country_code;
+    try {
+        await save(field_key);
+        response.sendStatus(200);
+    }
+    catch (e) {
+        console.error(e);
+        response.sendStatus(500);
+    }
+});
+
+app.delete('/unsave/:country_code', async (_request, response) => {
+    const field_key = _request.params.country_code;
+    try {
+        await unsave(field_key);
+        response.sendStatus(200);
+    }
+    catch (e) {
+        console.error(e);
+        response.sendStatus(500);
+    }
 });
 
 app.post('/db/refresh', async (_request, response) => {

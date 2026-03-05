@@ -23,6 +23,50 @@ const alerts = {
     },
 }
 
+const alert = {
+    getSearchData: async (country_code) => {
+        let response = await fetch(serverRoute("alert/" + country_code), {
+            headers,
+            method: 'GET'
+        });
+        let [data] = await response.json();
+        return data;
+    },
+}
+
+const save = {
+    setSave: async (country_code) => {
+        let response = await fetch(serverRoute("save/" + country_code), {
+            headers,
+            method: 'post'
+        });
+        let [data] = await response.json();
+        return data;
+    },
+}
+
+const unsave = {
+    setSave: async (country_code) => {
+        let response = await fetch(serverRoute("unsave/" + country_code), {
+            headers,
+            method: 'delete'
+        });
+        let [data] = await response.json();
+        return data;
+    },
+}
+
+const saves = {
+    getSaved: async () => {
+        let response = await fetch(serverRoute("saved"), {
+            headers,
+            method: 'GET'
+        });
+        let data = await response.json();
+        return data;
+    },
+}
+
 const util = {
     refreshDatabase: async () => {
         let response = await fetch(serverRoute("db/refresh"), {
@@ -36,4 +80,7 @@ const util = {
 export {
     util,
     alerts,
+    alert,
+    save,
+    unsave
 }
