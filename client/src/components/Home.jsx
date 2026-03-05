@@ -55,7 +55,7 @@ const [alerts, setAlerts] = useState([]);
          </Paper> }
 
 
-{selectedAlert && <Fab onPress={api.save.setSave(selectedAlert.country_code)} color="primary" sx={{ zIndex: 100, border: "2px solid #e1e1e1", position: "absolute", bottom: "1em", right: "1em" }}>
+{selectedAlert && <Fab onClick={() => api.save.setSave(selectedAlert.country_code)} color="primary" sx={{ zIndex: 100, border: "2px solid #e1e1e1", position: "absolute", bottom: "1em", right: "1em" }}>
     
     <BookmarkBorderIcon/>
 

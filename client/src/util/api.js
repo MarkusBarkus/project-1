@@ -29,7 +29,7 @@ const alert = {
             headers,
             method: 'GET'
         });
-        let [data] = await response.json();
+        let data = await response.json();
         return data;
     },
 }
@@ -40,8 +40,8 @@ const save = {
             headers,
             method: 'post'
         });
-        let [data] = await response.json();
-        return data;
+        console.log("fired")
+        return response.ok;
     },
 }
 
@@ -51,8 +51,7 @@ const unsave = {
             headers,
             method: 'delete'
         });
-        let [data] = await response.json();
-        return data;
+        return response.ok;
     },
 }
 

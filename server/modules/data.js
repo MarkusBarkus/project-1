@@ -82,9 +82,7 @@ const save = async (code) => {
     try {
         // Initialize the database
         context = await db.initDatabase(env.DB_URI);
-
-        await db.insertDocument(context, DATABASE_NAME, SAVED_COLLECTION, 
-        { country_code: code });
+        await db.insertDocument(context, DATABASE_NAME, SAVED_COLLECTION, [{ country_code: code }])
         }
     catch (e) {
         console.error(e);
@@ -118,7 +116,6 @@ const retrieveSaved = async () => {
         context = await db.initDatabase(env.DB_URI);
 
         const projection = {
-            _id: 0,
             country_code: 1,
         }
 
@@ -177,7 +174,7 @@ const retrieveAlert = async (CC) => {
             date: 1
         }
 
-        alert = await db.findDocuments(context, DATABASE_NAME, ALERTS_COLLECTION, {country_code: CC}, projection);
+        alert = await db.findDocument(context, DATABASE_NAME, ALERTS_COLLECTION, {country_code: CC}, projection);
     }
     catch (e) {
         console.error(e);
